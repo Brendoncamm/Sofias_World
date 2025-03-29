@@ -4,7 +4,7 @@
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Sofias World", sf::Style::Titlebar, sf::State::Windowed);
+    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Sofias World");
     window.setFramerateLimit(144);
 
     theSofia sofia = theSofia();
@@ -22,7 +22,7 @@ int main()
             else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
             {
                 std::cout << "There was a keypressed!" <<std::endl;
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Delete)
+                if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
                 {
                     window.close();
                 }
@@ -35,6 +35,7 @@ int main()
         }
 
         window.clear();
+        window.draw(sofia.getSprite());
         window.display();
     }
 }
