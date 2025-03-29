@@ -12,6 +12,8 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
-target_compile_features(main PRIVATE cxx_std_17)
-target_link_libraries(main PRIVATE SFML::Graphics)
+add_executable(Sofias_World 
+    src/main.cpp 
+    src/theSofia.cpp)
+target_compile_features(Sofias_World PRIVATE cxx_std_17)
+target_link_libraries(Sofias_World PRIVATE SFML::Graphics)
