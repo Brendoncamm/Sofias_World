@@ -4,7 +4,7 @@
 
 theSofia::theSofia()
 {
-    if (!myTexture.loadFromFile("Sofia_Happy.PNG"))
+    if (!myTexture.loadFromFile("src/Sofia_Happy.PNG"))
     {
         std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
     }
