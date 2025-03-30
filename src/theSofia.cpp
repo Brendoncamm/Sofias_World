@@ -9,10 +9,10 @@ theSofia::theSofia() : amplifiedMovement(false)
         std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
     }
     std::cout << "theSofia constructor called" << std::endl;
+
     mySprite.emplace(myTexture);
     mySprite->setPosition({500, 300});
     mySprite->setScale({0.05f, 0.05f});
-
 }
 
 theSofia::~theSofia()
@@ -62,5 +62,4 @@ void theSofia::amplifyMovement()
         amplifiedMovement = false;
         std::cout << "Normal movement" << std::endl;
     }
-    
 }
