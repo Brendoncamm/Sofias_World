@@ -14,7 +14,7 @@ private:
     sf::RenderWindow window;
     sf::Clock deltaClock;
     void processEvents();
-    void processSofiaMovements(sf::Vector2f movement, float dt);
+    void processSofiaMovements(float dt);
     theSofia sofia;
     MovementInputHandler inputHandler;
     sf::Texture backgroundTexture;

@@ -19,12 +19,11 @@ void Game::run()
     // Main game loop
     while (window.isOpen())
     {
+        float dt = deltaClock.restart().asSeconds();
         processEvents();
         // Update game state
+        processSofiaMovements(dt);
         render();
-        sf::Vector2f movement = inputHandler.handleKeyInputs();
-        float dt = deltaClock.restart().asSeconds();
-        processSofiaMovements(movement, dt);
     }
 }
 
@@ -66,8 +65,9 @@ void Game::render()
     window.display();
 }
 
-void Game::processSofiaMovements(sf::Vector2f movement, float dt)
+void Game::processSofiaMovements(float dt)
 {
     // Handle movement input
+    sf::Vector2f movement = inputHandler.handleKeyInputs();
     sofia.move(movement, dt);
 }
