@@ -6,12 +6,13 @@ int main()
 {
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Sofias World");
     window.setFramerateLimit(144);
-
+    sf::Clock deltaClock;
     theSofia sofia = theSofia();
 
     // Game loop
     while (window.isOpen())
-    {
+    {   
+        float dt = deltaClock.restart().asSeconds();
         // Look for events happening in the window
         while (const std::optional event = window.pollEvent())
         {
@@ -27,10 +28,22 @@ int main()
                     window.close();
                 }
             }
-            else if (const auto* mouseWheelScrolled = event->getIf<sf::Event::MouseWheelScrolled>())
+            
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
             {
-                std::cout << "The mouse wheel has been scrolled!" << std::endl;
-                std::cout << "Wheel movement: " << mouseWheelScrolled->delta << std::endl;
+                sofia.move(sf::Keyboard::Scancode::W, dt);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S))
+            {
+                sofia.move(sf::Keyboard::Scancode::S, dt);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
+            {
+                sofia.move(sf::Keyboard::Scancode::A, dt);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+            {
+                sofia.move(sf::Keyboard::Scancode::D, dt);
             }
         }
 
