@@ -1,4 +1,5 @@
 #include "theSofia.h"
+#include "MovementInputHandler.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -8,6 +9,7 @@ int main()
     window.setFramerateLimit(144);
     sf::Clock deltaClock;
     theSofia sofia = theSofia();
+    MovementInputHandler inputHandler = MovementInputHandler();
 
     // Game loop
     while (window.isOpen())
@@ -22,30 +24,16 @@ int main()
             }
             else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
             {
-                std::cout << "There was a keypressed!" <<std::endl;
                 if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
                 {
                     window.close();
                 }
             }
-            
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
-            {
-                sofia.move(sf::Keyboard::Scancode::W, dt);
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S))
-            {
-                sofia.move(sf::Keyboard::Scancode::S, dt);
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A))
-            {
-                sofia.move(sf::Keyboard::Scancode::A, dt);
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
-            {
-                sofia.move(sf::Keyboard::Scancode::D, dt);
-            }
+                        
         }
+        // Handle movement input
+        sf::Vector2f movement = inputHandler.handleKeyInputs();
+        sofia.move(movement, dt);
 
         window.clear();
         window.draw(sofia.getSprite());

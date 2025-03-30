@@ -4,7 +4,7 @@
 
 theSofia::theSofia()
 {
-    if (!myTexture.loadFromFile("src/Sofia_Happy.PNG"))
+    if (!myTexture.loadFromFile("Images/Crawling_Sofia.PNG"))
     {
         std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
     }
@@ -31,7 +31,7 @@ const sf::Sprite theSofia::getSprite() const
     return *mySprite;
 }
 
-void theSofia::move(sf::Keyboard::Scancode direction, float speed)
+void theSofia::move(sf::Vector2f movement, float speed)
 {
     // Move the sprite by 1 pixel to the right
     if (!mySprite)
@@ -40,36 +40,7 @@ void theSofia::move(sf::Keyboard::Scancode direction, float speed)
         return;
     }
     
-    float speedOfPixels = 2000.f; // Speed in pixels per second
-    sf::Vector2f movement(0.f, 0.f);
+    float speedOfPixels = 20.f; // Speed in pixels per second
 
-    switch (direction)
-    {
-        case sf::Keyboard::Scancode::W:
-            movement.y -= 1.f;
-            break;
-        case sf::Keyboard::Scancode::S:
-            movement.y += 1.f;
-            break;
-        case sf::Keyboard::Scancode::A:
-            movement.x -= 1.f;
-            break;
-        case sf::Keyboard::Scancode::D:
-            movement.x += 1.f;
-            break;
-        default:
-            std::cout << "Error: Invalid direction" << std::endl;
-            break;
-    }
-    if (movement.x !=0.f || movement.y != 0.f)
-    {
-        // Normalize the movement vector
-        float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
-        if (length != 0.f)
-        {
-            movement /= length;
-        }
-    }
-    // Scale the movement vector by the speed and delta time
     mySprite->move(movement * speedOfPixels * speed);
 }
