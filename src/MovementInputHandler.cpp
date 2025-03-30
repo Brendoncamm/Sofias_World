@@ -29,15 +29,18 @@ sf::Vector2f MovementInputHandler::handleKeyInputs()
     {
         movement.x += 1.f;
     }
+    
+    // Normalize the movement vector to ensure consistent speed
+    // If this isn't done when 2 keys are pressed at the same time, the speed will be faster
+    // than when only 1 key is pressed
     if (movement.x != 0.f || movement.y != 0.f)
     {
-        // Normalize the movement vector
         float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
         if (length != 0.f)
         {
             movement /= length;
         }
     }
-
+    
     return movement;
 }
