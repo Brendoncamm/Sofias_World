@@ -9,7 +9,8 @@ int frameHeight = 320;
 int totalFrames = 4;
 int currentFrame = 0;
 float frameDuration = 1.0f; // Duration of each frame in seconds
-sf::Vector2i sheetOffset = {300,0};
+
+sf::Vector2i sheetOffset = {0,0};
 theSofia::theSofia() : amplifiedMovement(false)
 {
     if (!myTexture.loadFromFile("Images/Sofia_Sprite_Sheet.png"))
@@ -92,4 +93,10 @@ sf::IntRect theSofia::getFrameRect(int frameIndex) const
     int x = sheetOffset.x + (frameWidth * frameIndex);
     int y = sheetOffset.y;
     return sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(frameWidth, frameHeight));
+}
+
+void theSofia::setAnimationToFirstFrame()
+{
+    currentFrame = 0;
+    mySprite->setTextureRect(getFrameRect(currentFrame));
 }

@@ -73,5 +73,9 @@ void Game::processSofiaMovements(float dt)
     {
         sofia.move(movement, dt);
     }
+    else
+    {
+        sofia.setAnimationToFirstFrame();
+    }
     
 }

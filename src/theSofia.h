@@ -9,6 +9,7 @@ class theSofia
     const sf::Sprite getSprite() const;
     void move(sf::Vector2f movement, float speed);
     void amplifyMovement();
+    void setAnimationToFirstFrame();
 
     private:
     sf::Texture myTexture;
@@ -16,6 +17,7 @@ class theSofia
     bool amplifiedMovement;
     sf::Clock animationClock;
     sf::IntRect getFrameRect(int frameIndex) const;
+    
 
 
 };
