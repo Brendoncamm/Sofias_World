@@ -28,6 +28,10 @@ int main()
                 {
                     window.close();
                 }
+                if (keyPressed->scancode == sf::Keyboard::Scancode::M)
+                {
+                    sofia.amplifyMovement();
+                }
             }
                         
         }

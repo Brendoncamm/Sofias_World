@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-theSofia::theSofia()
+theSofia::theSofia() : amplifiedMovement(false)
 {
     if (!myTexture.loadFromFile("Images/Crawling_Sofia.PNG"))
     {
@@ -42,5 +42,25 @@ void theSofia::move(sf::Vector2f movement, float speed)
     
     float speedOfPixels = 20.f; // Speed in pixels per second
 
+    if (amplifiedMovement)
+    {
+        speedOfPixels *= 20.f; // Double the speed if amplified
+    }
     mySprite->move(movement * speedOfPixels * speed);
+}
+
+void theSofia::amplifyMovement()
+{
+    std::cout << "Amplifying movement" << std::endl;
+    if (!amplifiedMovement)
+    {
+        amplifiedMovement = true;
+        std::cout << "Amplified movement" << std::endl;
+    }
+    else
+    {
+        amplifiedMovement = false;
+        std::cout << "Normal movement" << std::endl;
+    }
+    
 }
