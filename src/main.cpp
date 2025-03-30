@@ -11,6 +11,14 @@ int main()
     theSofia sofia = theSofia();
     MovementInputHandler inputHandler = MovementInputHandler();
 
+    sf::Texture backgroundTexture;
+    if (!backgroundTexture.loadFromFile("Images/background.png"))
+    {
+        std::cerr << "Error loading background texture" << std::endl;
+        return -1;
+    }
+    sf::Sprite backgroundSprite(backgroundTexture);
+
     // Game loop
     while (window.isOpen())
     {   
@@ -40,6 +48,7 @@ int main()
         sofia.move(movement, dt);
 
         window.clear();
+        window.draw(backgroundSprite);
         window.draw(sofia.getSprite());
         window.display();
     }
