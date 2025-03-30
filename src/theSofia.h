@@ -14,6 +14,8 @@ class theSofia
     sf::Texture myTexture;
     std::optional<sf::Sprite> mySprite;
     bool amplifiedMovement;
+    sf::Clock animationClock;
+    sf::IntRect getFrameRect(int frameIndex) const;
 
 
 };

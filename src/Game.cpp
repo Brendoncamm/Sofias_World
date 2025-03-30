@@ -19,8 +19,8 @@ void Game::run()
     // Main game loop
     while (window.isOpen())
     {
-        float dt = deltaClock.restart().asSeconds();
         processEvents();
+        float dt = deltaClock.restart().asSeconds();
         // Update game state
         processSofiaMovements(dt);
         render();
@@ -69,5 +69,9 @@ void Game::processSofiaMovements(float dt)
 {
     // Handle movement input
     sf::Vector2f movement = inputHandler.handleKeyInputs();
-    sofia.move(movement, dt);
+    if (movement.x != 0.f || movement.y != 0.f)
+    {
+        sofia.move(movement, dt);
+    }
+    
 }
