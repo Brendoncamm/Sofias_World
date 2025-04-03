@@ -1,5 +1,5 @@
 #include "MovementInputHandler.h"
-
+#include <cmath>
 MovementInputHandler::MovementInputHandler()
 {
     // Constructor implementation
