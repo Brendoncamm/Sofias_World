@@ -35,7 +35,7 @@ sf::Vector2f MovementInputHandler::handleKeyInputs()
     // than when only 1 key is pressed
     if (movement.x != 0.f || movement.y != 0.f)
     {
-        float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
+        float length = sqrt(movement.x * movement.x + movement.y * movement.y);
         if (length != 0.f)
         {
             movement /= length;

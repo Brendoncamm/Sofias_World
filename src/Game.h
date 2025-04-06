@@ -1,5 +1,6 @@
 #include "theSofia.h"
 #include "MovementInputHandler.h"
+#include "SpecialItems.h"
 #include <SFML/Graphics.hpp>
 
 class Game
@@ -19,9 +20,11 @@ private:
     // It is used to make the movement speed independent of the frame rate
     void processSofiaMovements(float dt);
 
+    void processObjectInteractions();
     // Game related members
     theSofia sofia;
     MovementInputHandler inputHandler;
+    SpecialItems theSpecialItem;
 
     // SFML related members
     sf::RenderWindow window;

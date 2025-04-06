@@ -10,9 +10,11 @@ class theSofia
     void move(sf::Vector2f movement, float speed);
     void amplifyMovement();
     void setAnimationToFirstFrame();
+    void sofiaHasSoother();
 
     private:
     sf::Texture myTexture;
+    sf::Texture mySootherTexture;
     std::optional<sf::Sprite> mySprite;
     bool amplifiedMovement;
     sf::Clock animationClock;

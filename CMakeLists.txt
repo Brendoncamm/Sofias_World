@@ -16,6 +16,11 @@ add_executable(Sofias_World
     src/main.cpp 
     src/theSofia.cpp
     src/MovementInputHandler.cpp
-    src/Game.cpp)
+    src/Game.cpp
+    src/SpecialItems.cpp)
 target_compile_features(Sofias_World PRIVATE cxx_std_17)
 target_link_libraries(Sofias_World PRIVATE SFML::Graphics)
+
+## Add the test executable  
+enable_testing()
+add_subdirectory(Test)
