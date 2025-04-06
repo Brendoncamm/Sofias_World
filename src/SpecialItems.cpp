@@ -17,7 +17,6 @@ SpecialItems::~SpecialItems()
 
 void SpecialItems::createSpecialItem(specialItemType itemType, sf::Vector2f position)
 {
-    SpecialItemInstance itemInstance;
     for (const auto& elem : activeSpecialItems)
     {
         // We want to ensure only 1 item type of the special items exist
@@ -36,15 +35,13 @@ void SpecialItems::createSpecialItem(specialItemType itemType, sf::Vector2f posi
         return;
     }
     
-    itemInstance.itemType = itemType;
-    itemInstance.itemSprite.emplace(it->second); // it->second aligns with the texture for the associated item type
-    itemInstance.itemSprite->setPosition(position);
-    itemInstance.itemSprite->setScale({0.5f, 0.5f});
-    itemInstance.isItemSpawned = true;
-    std::cout << "Adding special item: " << printItemName(itemType) << std::endl;
-    activeSpecialItems.push_back(itemInstance);    
-}
+    sf::Sprite itemSprite (it->second);
+    itemSprite.setPosition(position);
+    itemSprite.setScale({0.5f, 0.5f});
 
+    std::cout << "Adding special item: " << printItemName(itemType) << std::endl;
+    activeSpecialItems.emplace_back(std::move(itemSprite), itemType, true);    
+}
 
 std::string SpecialItems::printItemName(specialItemType theItem)
 {
@@ -63,4 +60,3 @@ std::string SpecialItems::printItemName(specialItemType theItem)
         break;
     }
 }
-

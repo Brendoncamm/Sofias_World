@@ -14,18 +14,28 @@ class SpecialItems
         sofiaTeddyBear = 1
     };
 
-    // Struct corresponding to special items.
-    struct SpecialItemInstance
-    {
-        std::optional<sf::Sprite>  itemSprite;
-        specialItemType itemType;
-        bool        isItemSpawned = false;
-    };
-
     void createSpecialItem(specialItemType itemType, sf::Vector2f position);
     sf::Sprite drawSpecialItem(specialItemType);
 
     private:
+    
+    // Struct corresponding to special items.
+    struct SpecialItemInstance
+    {
+        std::optional<sf::Sprite>  itemSprite;
+        SpecialItems::specialItemType itemType;
+        bool        isItemSpawned;
+    
+        // Struct constructor
+        SpecialItemInstance(sf::Sprite&& mySprite,
+                            SpecialItems::specialItemType theItem, 
+                            bool spawnedState = false) : itemType(theItem),
+                                                         isItemSpawned(spawnedState)
+                                                       {
+                                                         itemSprite.emplace(std::move(mySprite));
+                                                       }
+    };
+    
     std::unordered_map<specialItemType, sf::Texture> itemTextureMap;
     std::vector<SpecialItemInstance> activeSpecialItems;
     sf::Texture sofiaSootherTexture;
