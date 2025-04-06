@@ -102,7 +102,3 @@ void theSofia::setAnimationToFirstFrame()
     mySprite->setTextureRect(getFrameRect(currentFrame));
 }
 
-sf::Sprite theSofia::spawnSoother()
-{
- // todo
-}

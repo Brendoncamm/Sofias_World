@@ -1,4 +1,5 @@
 #include "Game.h"
+
 Game::Game() : sofia(), 
                inputHandler(),
                backgroundTexture("Images/background.png"),
@@ -48,6 +49,11 @@ void Game::processEvents()
             }
             if (keyPressed->scancode == sf::Keyboard::Scancode::K)
             {
+                theSpecialItem.createSpecialItem(SpecialItems::specialItemType::sofiaPacifier, {500.f, 500.f});
+            }
+            if (keyPressed->scancode == sf::Keyboard::Scancode::L)
+            {
+                theSpecialItem.removeSpecialItem(SpecialItems::specialItemType::sofiaPacifier);
             }
         }
     }
@@ -63,6 +69,17 @@ void Game::render()
     
     // Draw Sofia
     window.draw(sofia.getSprite());
+
+    // Draw special items
+    if (theSpecialItem.specialItemIsSpawned(SpecialItems::specialItemType::sofiaPacifier))
+    {
+        auto itemSprite = theSpecialItem.drawSpecialItem(SpecialItems::specialItemType::sofiaPacifier);
+        if (itemSprite)
+        {
+            window.draw(*itemSprite);
+        }
+    }
+
     // Display the contents of the window
     window.display();
 }

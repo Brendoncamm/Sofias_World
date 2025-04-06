@@ -3,11 +3,13 @@
 
 SpecialItems::SpecialItems()
 {
-    std::cout << "Special item constructor called" << std::endl;    
+    std::cout << "Special item constructor called" << std::endl;   
+
     if (!sofiaSootherTexture.loadFromFile("Images/Soother.png"))
     {
         std::cout << "Couldn't load soother texture (Soother.png)" << std::endl;
     }
+
     itemTextureMap[specialItemType::sofiaPacifier] = sofiaSootherTexture;
 }
 
@@ -17,30 +19,89 @@ SpecialItems::~SpecialItems()
 
 void SpecialItems::createSpecialItem(specialItemType itemType, sf::Vector2f position)
 {
-    for (const auto& elem : activeSpecialItems)
+    for (auto& elem : activeSpecialItems)
     {
-        // We want to ensure only 1 item type of the special items exist
-        if (itemType == elem.itemType)
+        // If the item has already been added, make sure it's able 
+        // to be spawned again
+        // This is useful for when the item is removed and then
+        // added again
+        if (itemType == elem.itemType &&
+            !elem.isItemSpawned)
         {
-            std::cout << "Spectial item type has already been added" << std::endl;
-            return;
+           elem.isItemSpawned = true;
+           std::cout << "Spawning special item: " << printItemName(itemType) << std::endl;
         }
+
+        return;
     }
 
     // Check to make sure texture exists for the item
     auto it = itemTextureMap.find(itemType);
     if (it == itemTextureMap.end())
     {
-        std::cerr << "Error, no text for item type: " << (int)itemType << std::endl;
+        std::cerr << "Error, no texture for item type: " << (int)itemType << std::endl;
         return;
     }
     
     sf::Sprite itemSprite (it->second);
     itemSprite.setPosition(position);
-    itemSprite.setScale({0.5f, 0.5f});
+    itemSprite.setScale({0.05f, 0.05f});
 
     std::cout << "Adding special item: " << printItemName(itemType) << std::endl;
     activeSpecialItems.emplace_back(std::move(itemSprite), itemType, true);    
+}
+
+std::optional<sf::Sprite> SpecialItems::drawSpecialItem(specialItemType itemType)
+{
+    for (const auto& elem : activeSpecialItems)
+    {
+        if (elem.itemType == itemType && 
+            elem.isItemSpawned)
+        {
+            if (!elem.itemSprite)
+            {
+                std::cerr << "Error: itemSprite is not initialized." << std::endl;
+                return std::nullopt;
+            }
+            return *elem.itemSprite;
+        }
+    }
+    return std::nullopt;
+}
+
+void SpecialItems::removeSpecialItem(specialItemType itemType)
+{
+    for (auto& elem : activeSpecialItems)
+    {
+        if (elem.itemType == itemType)
+        {
+            std::cout << "Removing special item: " << printItemName(itemType) << std::endl;
+            elem.isItemSpawned = false;
+            return;
+        }
+    }
+}
+
+bool SpecialItems::specialItemIsSpawned(specialItemType itemType)
+{
+    // Return right away if no special items exist
+    // This is a performance optimization
+    // to avoid looping through the vector if it is empty
+    if (activeSpecialItems.empty())
+    {
+        return false;
+    }
+
+    for (const auto& elem : activeSpecialItems)
+    {
+        if (elem.itemType == itemType && 
+            elem.isItemSpawned)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 std::string SpecialItems::printItemName(specialItemType theItem)

@@ -15,8 +15,9 @@ class SpecialItems
     };
 
     void createSpecialItem(specialItemType itemType, sf::Vector2f position);
-    sf::Sprite drawSpecialItem(specialItemType);
-
+    std::optional<sf::Sprite> drawSpecialItem(specialItemType itemType);
+    bool specialItemIsSpawned(specialItemType itemType);
+    void removeSpecialItem(specialItemType itemType);
     private:
     
     // Struct corresponding to special items.
