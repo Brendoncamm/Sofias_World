@@ -17,7 +17,8 @@ add_executable(Sofias_World
     src/theSofia.cpp
     src/MovementInputHandler.cpp
     src/Game.cpp
-    src/SpecialItems.cpp)
+    src/SpecialItems.cpp
+    src/ParentEntity.cpp)
 target_compile_features(Sofias_World PRIVATE cxx_std_17)
 target_link_libraries(Sofias_World PRIVATE SFML::Graphics)
 
