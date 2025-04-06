@@ -12,11 +12,18 @@ int currentFrame = 0;
 float frameDuration = 1.0f; // Duration of each frame in seconds
 
 sf::Vector2i sheetOffset = {0,0};
+sf::Vector2f reflectLeft = {-0.5f, 0.5f};
+sf::Vector2f reflectRight = {0.5f, 0.5f};
+
 theSofia::theSofia() : amplifiedMovement(false)
 {
     if (!myTexture.loadFromFile("Images/Sofia_Sprite_Sheet.png"))
     {
         std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
+    }
+    if (!mySootherTexture.loadFromFile("Images/Sofia_Soother_Added.png"))
+    {
+        std::cout << "Can't load the file: Sofia_Soother_Added.PNG" << std::endl;
     }
     std::cout << "theSofia constructor called" << std::endl;
     
@@ -64,6 +71,17 @@ void theSofia::move(sf::Vector2f movement, float speed)
 
     mySprite->move(movement * speedOfPixels * speed);
 
+    // Set the rotation of sofia depending on 
+    // which direction she's moving.
+    if (movement.x < 0.f)
+    {
+        mySprite->setScale(reflectLeft);
+    }
+    else if (movement.y == 0)
+    {
+        mySprite->setScale(reflectRight); // Reset rotation to face right
+    }
+
     if (movement.x != 0.f || 
         movement.y != 0.f && 
         animationClock.getElapsedTime().asSeconds() > frameDuration)
@@ -100,5 +118,12 @@ void theSofia::setAnimationToFirstFrame()
 {
     currentFrame = 0;
     mySprite->setTextureRect(getFrameRect(currentFrame));
+}
+
+void theSofia::sofiaHasSoother()
+{   
+    mySprite->setTexture(mySootherTexture, true);
+    mySprite->setTextureRect(getFrameRect(0));
+    mySprite->setScale({0.5f, 0.5f});
 }
 

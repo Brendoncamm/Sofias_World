@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game() : sofia(), 
                inputHandler(),
@@ -11,10 +12,12 @@ Game::Game() : sofia(),
     window.setFramerateLimit(144);
 
 }
+
 Game::~Game()
 {
     // Destructor implementation
 }
+
 void Game::run()
 {
     // Main game loop
@@ -73,13 +76,14 @@ void Game::render()
     // Draw special items
     if (theSpecialItem.specialItemIsSpawned(SpecialItems::specialItemType::sofiaPacifier))
     {
-        auto itemSprite = theSpecialItem.drawSpecialItem(SpecialItems::specialItemType::sofiaPacifier);
+        auto itemSprite = theSpecialItem.getSpecialItemSprite(SpecialItems::specialItemType::sofiaPacifier);
         if (itemSprite)
         {
             window.draw(*itemSprite);
         }
     }
-
+    // Process object interactions
+    processObjectInteractions();
     // Display the contents of the window
     window.display();
 }
@@ -97,4 +101,23 @@ void Game::processSofiaMovements(float dt)
         sofia.setAnimationToFirstFrame();
     }
     
+}
+
+void Game::processObjectInteractions()
+{
+    if (theSpecialItem.specialItemIsSpawned(SpecialItems::specialItemType::sofiaPacifier))
+    {
+        sf::FloatRect sofiaBounds = sofia.getSprite().getGlobalBounds();
+        sf::FloatRect itemBounds = theSpecialItem.getSpecialItemSprite(SpecialItems::specialItemType::sofiaPacifier)->getGlobalBounds();
+
+        // Check for intersection between Sofia and the special item
+        // If the intersection is not empty, it means Sofia is interacting with the item
+        if (sofiaBounds.findIntersection(itemBounds).has_value())
+        {
+            // Handle interaction with the special item
+            std::cout << "Sofia picked up the special item!" << std::endl;
+            theSpecialItem.removeSpecialItem(SpecialItems::specialItemType::sofiaPacifier);
+            sofia.sofiaHasSoother();
+        }
+    }
 }

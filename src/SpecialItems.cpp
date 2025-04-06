@@ -5,7 +5,7 @@ SpecialItems::SpecialItems()
 {
     std::cout << "Special item constructor called" << std::endl;   
 
-    if (!sofiaSootherTexture.loadFromFile("Images/Soother.png"))
+    if (!sofiaSootherTexture.loadFromFile("Images/Transparent_Soother.png"))
     {
         std::cout << "Couldn't load soother texture (Soother.png)" << std::endl;
     }
@@ -45,13 +45,13 @@ void SpecialItems::createSpecialItem(specialItemType itemType, sf::Vector2f posi
     
     sf::Sprite itemSprite (it->second);
     itemSprite.setPosition(position);
-    itemSprite.setScale({0.05f, 0.05f});
+    itemSprite.setScale({1.f, 1.f});
 
     std::cout << "Adding special item: " << printItemName(itemType) << std::endl;
     activeSpecialItems.emplace_back(std::move(itemSprite), itemType, true);    
 }
 
-std::optional<sf::Sprite> SpecialItems::drawSpecialItem(specialItemType itemType)
+std::optional<sf::Sprite> SpecialItems::getSpecialItemSprite(specialItemType itemType) const
 {
     for (const auto& elem : activeSpecialItems)
     {

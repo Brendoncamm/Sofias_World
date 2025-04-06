@@ -15,7 +15,7 @@ class SpecialItems
     };
 
     void createSpecialItem(specialItemType itemType, sf::Vector2f position);
-    std::optional<sf::Sprite> drawSpecialItem(specialItemType itemType);
+    std::optional<sf::Sprite> getSpecialItemSprite(specialItemType itemType) const;
     bool specialItemIsSpawned(specialItemType itemType);
     void removeSpecialItem(specialItemType itemType);
     private:

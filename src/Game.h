@@ -20,6 +20,7 @@ private:
     // It is used to make the movement speed independent of the frame rate
     void processSofiaMovements(float dt);
 
+    void processObjectInteractions();
     // Game related members
     theSofia sofia;
     MovementInputHandler inputHandler;
