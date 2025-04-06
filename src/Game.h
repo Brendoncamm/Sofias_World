@@ -1,5 +1,6 @@
 #include "theSofia.h"
 #include "MovementInputHandler.h"
+#include "SpecialItems.h"
 #include <SFML/Graphics.hpp>
 
 class Game
@@ -22,6 +23,7 @@ private:
     // Game related members
     theSofia sofia;
     MovementInputHandler inputHandler;
+    SpecialItems theSpecialItem;
 
     // SFML related members
     sf::RenderWindow window;

@@ -1,9 +1,9 @@
 #include "Game.h"
-
 Game::Game() : sofia(), 
                inputHandler(),
                backgroundTexture("Images/background.png"),
-               backgroundSprite(backgroundTexture)
+               backgroundSprite(backgroundTexture),
+               theSpecialItem()
 {
     // Constructor implementation
     window.create(sf::VideoMode({1920u, 1080u}), "Sofia's World");
@@ -46,6 +46,9 @@ void Game::processEvents()
             {
                 sofia.amplifyMovement();
             }
+            if (keyPressed->scancode == sf::Keyboard::Scancode::K)
+            {
+            }
         }
     }
 }
@@ -60,7 +63,6 @@ void Game::render()
     
     // Draw Sofia
     window.draw(sofia.getSprite());
-    
     // Display the contents of the window
     window.display();
 }

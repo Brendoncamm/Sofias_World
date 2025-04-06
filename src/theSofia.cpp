@@ -1,4 +1,5 @@
 #include "theSofia.h"
+#include "SpecialItems.h"
 #include <iostream>
 
 
@@ -99,4 +100,9 @@ void theSofia::setAnimationToFirstFrame()
 {
     currentFrame = 0;
     mySprite->setTextureRect(getFrameRect(currentFrame));
+}
+
+sf::Sprite theSofia::spawnSoother()
+{
+ // todo
 }

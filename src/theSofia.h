@@ -10,6 +10,7 @@ class theSofia
     void move(sf::Vector2f movement, float speed);
     void amplifyMovement();
     void setAnimationToFirstFrame();
+    sf::Sprite spawnSoother();
 
     private:
     sf::Texture myTexture;
