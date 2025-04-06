@@ -7,7 +7,7 @@ SpecialItems::SpecialItems()
 
     if (!sofiaSootherTexture.loadFromFile("Images/Transparent_Soother.png"))
     {
-        std::cout << "Couldn't load soother texture (Soother.png)" << std::endl;
+        std::cout << "Couldn't load soother texture (Transparent_Soother.png)" << std::endl;
     }
 
     itemTextureMap[specialItemType::sofiaPacifier] = sofiaSootherTexture;
