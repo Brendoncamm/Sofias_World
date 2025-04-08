@@ -13,7 +13,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(Sofias_World 
-    src/main.cpp 
+    src/main.cpp
     src/theSofia.cpp
     src/MovementInputHandler.cpp
     src/Game.cpp

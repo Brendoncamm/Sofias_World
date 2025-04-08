@@ -15,7 +15,7 @@ class SpecialItems
     };
 
     void createSpecialItem(specialItemType itemType, sf::Vector2f position);
-    std::optional<sf::Sprite> getSpecialItemSprite(specialItemType itemType) const;
+    std::optional<sf::Sprite> getSpecialItemSprite(specialItemType itemType);
     bool specialItemIsSpawned(specialItemType itemType);
     void removeSpecialItem(specialItemType itemType);
     private:
@@ -43,6 +43,7 @@ class SpecialItems
     std::optional<sf::Sprite> sofiaSoother;
     std::string printItemName(specialItemType itemType);
     sf::Clock animationClock;
+    int currentFrame;
       
 
 };

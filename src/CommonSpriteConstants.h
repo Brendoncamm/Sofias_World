@@ -4,10 +4,12 @@
 
 namespace CommonSpriteConstants
 {
-    inline constexpr int FRAME_WIDTH_32  = 32;
-    inline constexpr int FRAME_HEIGHT_32 = 32;
-    inline constexpr int FRAME_WIDTH_64  = 64;
-    inline constexpr int FRAME_HEIGHT_64 = 64;
+    inline constexpr int SPRITE_WIDTH_32  = 32;
+    inline constexpr int SPRITE_HEIGHT_32 = 32;
+    inline constexpr int SPRITE_WIDTH_64  = 64;
+    inline constexpr int SPRITE_HEIGHT_64 = 64;
+    inline constexpr int SPRITE_FRAME_SIZE_32 = 32;
+    inline constexpr int SPRITE_FRAME_SIZE_64 = 64;
 
     inline constexpr sf::Vector2i SPRITE_SHEET_OFFSET = {0, 0};
     inline constexpr sf::Vector2f REFLECT_LEFT        = {-2.f, 2.f};
