@@ -5,19 +5,19 @@
 
 // Sofia Sprite Sheet Constants
 
-int frameWidth = 288;
-int frameHeight = 320;
-int totalFrames = 4;
+int frameWidth = 64;
+int frameHeight = 64;
+int totalFrames = 2;
 int currentFrame = 0;
 float frameDuration = 1.0f; // Duration of each frame in seconds
 
 sf::Vector2i sheetOffset = {0,0};
-sf::Vector2f reflectLeft = {-0.5f, 0.5f};
-sf::Vector2f reflectRight = {0.5f, 0.5f};
+sf::Vector2f reflectLeft = {-5.f, 5.f};
+sf::Vector2f reflectRight = {5.f, 5.f};
 
 theSofia::theSofia() : amplifiedMovement(false)
 {
-    if (!myTexture.loadFromFile("Images/Sofia_Sprite_Sheet.png"))
+    if (!myTexture.loadFromFile("Images/Sofia_Crawling_2Frame.png"))
     {
         std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
     }
@@ -30,7 +30,7 @@ theSofia::theSofia() : amplifiedMovement(false)
     mySprite.emplace(myTexture);// Define the rectangle for the sprite
     mySprite->setTextureRect(getFrameRect(0));// Set the texture rectangle to the first frame
     mySprite->setPosition({500, 300});
-    mySprite->setScale({0.5f, 0.5f});
+    mySprite->setScale({5.f, 5.f});
 
 }
 
@@ -81,12 +81,14 @@ void theSofia::move(sf::Vector2f movement, float speed)
     {
         mySprite->setScale(reflectRight); // Reset rotation to face right
     }
-
+    std::cout << "Movement x: " << movement.x << std::endl;
+    std::cout << "Movement y: " << movement.y << std::endl;
     if (movement.x != 0.f || 
         movement.y != 0.f && 
         animationClock.getElapsedTime().asSeconds() > frameDuration)
     {
         currentFrame = (currentFrame + 1) % totalFrames; // Update the current frame
+        std::cout << "Current frame: " << currentFrame << std::endl;
         mySprite->setTextureRect(getFrameRect(currentFrame)); // Set the texture rectangle to the current frame
         animationClock.restart(); // Restart the clock for the next frame
     }
