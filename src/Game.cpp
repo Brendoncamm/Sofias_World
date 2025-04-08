@@ -5,7 +5,8 @@ Game::Game() : sofia(),
                inputHandler(),
                backgroundTexture("Images/background.png"),
                backgroundSprite(backgroundTexture),
-               theSpecialItem()
+               theSpecialItem(),
+               parentEntity()
 {
     // Constructor implementation
     window.create(sf::VideoMode({1920u, 1080u}), "Sofia's World");
@@ -84,6 +85,8 @@ void Game::render()
     }
     // Process object interactions
     processObjectInteractions();
+
+    window.draw(parentEntity.drawAndAnimate());
     // Display the contents of the window
     window.display();
 }

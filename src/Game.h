@@ -2,6 +2,7 @@
 #include "MovementInputHandler.h"
 #include "SpecialItems.h"
 #include <SFML/Graphics.hpp>
+#include "ParentEntity.h"
 
 class Game
 {
@@ -25,6 +26,7 @@ private:
     theSofia sofia;
     MovementInputHandler inputHandler;
     SpecialItems theSpecialItem;
+    ParentEntity parentEntity;
 
     // SFML related members
     sf::RenderWindow window;

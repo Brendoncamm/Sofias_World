@@ -1,13 +1,15 @@
 #include "SpecialItems.h"
+#include "CommonSpriteConstants.h"
+#include "CommonSpriteUtilities.h"
 #include <iostream>
 
-SpecialItems::SpecialItems()
+SpecialItems::SpecialItems() : currentFrame ((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)
 {
     std::cout << "Special item constructor called" << std::endl;   
 
-    if (!sofiaSootherTexture.loadFromFile("Images/Transparent_Soother.png"))
+    if (!sofiaSootherTexture.loadFromFile("Images/Soother_Item_2Frame.png"))
     {
-        std::cout << "Couldn't load soother texture (Transparent_Soother.png)" << std::endl;
+        std::cout << "Couldn't load soother texture (Images/Soother_Item_2Frame.png)" << std::endl;
     }
 
     itemTextureMap[specialItemType::sofiaPacifier] = sofiaSootherTexture;
@@ -45,15 +47,15 @@ void SpecialItems::createSpecialItem(specialItemType itemType, sf::Vector2f posi
     
     sf::Sprite itemSprite (it->second);
     itemSprite.setPosition(position);
-    itemSprite.setScale({1.f, 1.f});
+    itemSprite.setScale(CommonSpriteConstants::DEFAULT_GROUND_ITEM_SCALE);
 
     std::cout << "Adding special item: " << printItemName(itemType) << std::endl;
     activeSpecialItems.emplace_back(std::move(itemSprite), itemType, true);    
 }
 
-std::optional<sf::Sprite> SpecialItems::getSpecialItemSprite(specialItemType itemType) const
+std::optional<sf::Sprite> SpecialItems::getSpecialItemSprite(specialItemType itemType)
 {
-    for (const auto& elem : activeSpecialItems)
+    for (auto& elem : activeSpecialItems)
     {
         if (elem.itemType == itemType && 
             elem.isItemSpawned)
@@ -63,6 +65,15 @@ std::optional<sf::Sprite> SpecialItems::getSpecialItemSprite(specialItemType ite
                 std::cerr << "Error: itemSprite is not initialized." << std::endl;
                 return std::nullopt;
             }
+
+            if (animationClock.getElapsedTime().asSeconds() > 0.08f)
+            {
+                currentFrame = (currentFrame + 1) % CommonSpriteConstants::TOTAL_FRAMES; // Update the current frame
+                animationClock.restart(); // Restart the clock for the next frame
+            }
+
+            elem.itemSprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_32>(currentFrame)); // Set the texture rectangle to the current frame
+
             return *elem.itemSprite;
         }
     }
@@ -121,3 +132,5 @@ std::string SpecialItems::printItemName(specialItemType theItem)
         break;
     }
 }
+
+
