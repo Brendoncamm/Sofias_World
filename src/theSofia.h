@@ -1,6 +1,7 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
+
 class theSofia
 {
     public:
@@ -18,9 +19,5 @@ class theSofia
     std::optional<sf::Sprite> mySprite;
     bool amplifiedMovement;
     sf::Clock animationClock;
-    sf::IntRect getFrameRect(int frameIndex) const;
     int currentFrame;
-    
-
-
 };

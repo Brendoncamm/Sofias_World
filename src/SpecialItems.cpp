@@ -1,13 +1,14 @@
 #include "SpecialItems.h"
+#include "CommonSpriteConstants.h"
 #include <iostream>
 
 SpecialItems::SpecialItems()
 {
     std::cout << "Special item constructor called" << std::endl;   
 
-    if (!sofiaSootherTexture.loadFromFile("Images/Transparent_Soother.png"))
+    if (!sofiaSootherTexture.loadFromFile("Images/Soother_Item_2Frame.png"))
     {
-        std::cout << "Couldn't load soother texture (Transparent_Soother.png)" << std::endl;
+        std::cout << "Couldn't load soother texture (Images/Soother_Item_2Frame.png)" << std::endl;
     }
 
     itemTextureMap[specialItemType::sofiaPacifier] = sofiaSootherTexture;
@@ -45,7 +46,7 @@ void SpecialItems::createSpecialItem(specialItemType itemType, sf::Vector2f posi
     
     sf::Sprite itemSprite (it->second);
     itemSprite.setPosition(position);
-    itemSprite.setScale({1.f, 1.f});
+    itemSprite.setScale(CommonSpriteConstants::DEFAULT_GROUND_ITEM_SCALE);
 
     std::cout << "Adding special item: " << printItemName(itemType) << std::endl;
     activeSpecialItems.emplace_back(std::move(itemSprite), itemType, true);    

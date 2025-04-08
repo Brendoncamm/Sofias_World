@@ -1,16 +1,30 @@
+#ifndef COMMONSPRITECONSTANTS_H
+#define COMMONSPRITECONSTANTS_H
 #include <SFML/Graphics.hpp>
 
 namespace CommonSpriteConstants
 {
-    int FRAME_WIDTH_32_BIT  = 32;
-    int FRAME_HEIGHT_32_BIT = 32;
-    int FRAME_WIDTH_64_BIT  = 64;
-    int FRAME_HEIGHT_64_BIT = 64;
+    inline constexpr int FRAME_WIDTH_32  = 32;
+    inline constexpr int FRAME_HEIGHT_32 = 32;
+    inline constexpr int FRAME_WIDTH_64  = 64;
+    inline constexpr int FRAME_HEIGHT_64 = 64;
 
-    sf::Vector2i SPRITE_SHEET_OFFSET = {0, 0};
-    sf::Vector2f REFLECT_LEFT        = {-5.f, 5.f};
-    sf::Vector2f REFLECT_RIGHT       = {5.f, 5.f};
-    sf::Vector2i SHEET_OFFSET        = {0, 0};
-    float FRAME_DURATION = 1.0f; // Duration of each frame in seconds
-    int TOTAL_FRAMES = 2;
+    inline constexpr sf::Vector2i SPRITE_SHEET_OFFSET = {0, 0};
+    inline constexpr sf::Vector2f REFLECT_LEFT        = {-2.f, 2.f};
+    inline constexpr sf::Vector2f REFLECT_RIGHT       = {2.f, 2.f};
+    inline constexpr sf::Vector2i SHEET_OFFSET        = {0, 0};
+    inline constexpr sf::Vector2f DEFAULT_POSITION    = {500, 300};
+    inline constexpr sf::Vector2f DEFAULT_GROUND_ITEM_SCALE = {2.f, 2.f};
+
+    inline constexpr float FRAME_DURATION = 1.0f;
+    inline constexpr int TOTAL_FRAMES = 2;
+    
+    enum class FRAME_NUMBER
+    {
+        FIRST = 0,
+        SECOND = 1,
+        THIRD = 2,
+        FOURTH = 3,
+    };
 };
+#endif // COMMONSPRITECONSTANTS_H

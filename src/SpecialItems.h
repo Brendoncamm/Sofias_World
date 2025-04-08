@@ -42,6 +42,7 @@ class SpecialItems
     sf::Texture sofiaSootherTexture;
     std::optional<sf::Sprite> sofiaSoother;
     std::string printItemName(specialItemType itemType);
+    sf::Clock animationClock;
       
 
 };

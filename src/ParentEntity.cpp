@@ -16,7 +16,7 @@ ParentEntity::ParentEntity()
     }
     dadWorkSprite.emplace(dadWorkTexture);// Define the rectangle for the sprite
     dadWorkSprite->setPosition({500, 300});
-    dadWorkSprite->setScale({25.f, 25.f});
+    dadWorkSprite->setScale({5.f, 5.f});
 }
 
 ParentEntity::~ParentEntity()

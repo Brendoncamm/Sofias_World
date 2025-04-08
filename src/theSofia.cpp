@@ -1,6 +1,7 @@
 #include "theSofia.h"
 #include "SpecialItems.h"
 #include "CommonSpriteConstants.h"
+#include "CommonSpriteUtilities.h"
 #include <iostream>
 
 
@@ -13,17 +14,16 @@ theSofia::theSofia() : amplifiedMovement(false),
     {
         std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
     }
-    if (!mySootherTexture.loadFromFile("Images/Sofia_Soother_Added.png"))
+    if (!mySootherTexture.loadFromFile("Images/Sofia_Soother_2Frame.png"))
     {
         std::cout << "Can't load the file: Sofia_Soother_Added.PNG" << std::endl;
     }
     std::cout << "theSofia constructor called" << std::endl;
     
     mySprite.emplace(myTexture);// Define the rectangle for the sprite
-    mySprite->setTextureRect(getFrameRect(0));// Set the texture rectangle to the first frame
-    mySprite->setPosition({500, 300});
-    mySprite->setScale({5.f, 5.f});
-
+    mySprite->setTextureRect(CommonSpriteUtilities::getAnimationFrameRect64((int)CommonSpriteConstants::FRAME_NUMBER::FIRST));// Set the texture rectangle to the first frame
+    mySprite->setPosition(CommonSpriteConstants::DEFAULT_POSITION);
+    mySprite->setScale(CommonSpriteConstants::REFLECT_RIGHT);
 }
 
 theSofia::~theSofia()
@@ -52,7 +52,7 @@ void theSofia::move(sf::Vector2f movement, float speed)
     }
     
     currentFrame = (currentFrame + 1) % CommonSpriteConstants::TOTAL_FRAMES; // Update the current frame
-    mySprite->setTextureRect(getFrameRect(currentFrame)); // Set the texture rectangle to the current frame
+    mySprite->setTextureRect(CommonSpriteUtilities::getAnimationFrameRect64(currentFrame)); // Set the texture rectangle to the current frame
 
     float speedOfPixels = 20.f; // Speed in pixels per second
 
@@ -73,15 +73,13 @@ void theSofia::move(sf::Vector2f movement, float speed)
     {
         mySprite->setScale(CommonSpriteConstants::REFLECT_RIGHT); // Reset rotation to face right
     }
-    std::cout << "Movement x: " << movement.x << std::endl;
-    std::cout << "Movement y: " << movement.y << std::endl;
-    if (movement.x != 0.f || 
-        movement.y != 0.f && 
+
+    if ((movement.x != 0.f || 
+         movement.y != 0.f) && 
         animationClock.getElapsedTime().asSeconds() > CommonSpriteConstants::FRAME_DURATION)
     {
         currentFrame = (currentFrame + 1) % CommonSpriteConstants::TOTAL_FRAMES; // Update the current frame
-        std::cout << "Current frame: " << currentFrame << std::endl;
-        mySprite->setTextureRect(getFrameRect(currentFrame)); // Set the texture rectangle to the current frame
+        mySprite->setTextureRect(CommonSpriteUtilities::getAnimationFrameRect64(currentFrame)); // Set the texture rectangle to the current frame
         animationClock.restart(); // Restart the clock for the next frame
     }
 }
@@ -101,23 +99,15 @@ void theSofia::amplifyMovement()
     }
 }
 
-sf::IntRect theSofia::getFrameRect(int frameIndex) const
-{
-    int x = CommonSpriteConstants::SHEET_OFFSET.x + (CommonSpriteConstants::FRAME_WIDTH_64_BIT * frameIndex);
-    int y = CommonSpriteConstants::SHEET_OFFSET.y;
-    return sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(CommonSpriteConstants::FRAME_WIDTH_64_BIT, CommonSpriteConstants::FRAME_WIDTH_64_BIT));
-}
-
 void theSofia::setAnimationToFirstFrame()
 {
-    currentFrame = 0;
-    mySprite->setTextureRect(getFrameRect(currentFrame));
+    mySprite->setTextureRect(CommonSpriteUtilities::getAnimationFrameRect64((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)); // Set the texture rectangle to the first frame
 }
 
 void theSofia::sofiaHasSoother()
 {   
     mySprite->setTexture(mySootherTexture, true);
-    mySprite->setTextureRect(getFrameRect(0));
+    mySprite->setTextureRect(CommonSpriteUtilities::getAnimationFrameRect64((int)CommonSpriteConstants::FRAME_NUMBER::FIRST));
     mySprite->setScale({0.5f, 0.5f});
 }
 
