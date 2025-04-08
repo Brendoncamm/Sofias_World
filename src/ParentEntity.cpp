@@ -1,22 +1,20 @@
 #include "ParentEntity.h"
+#include "CommonSpriteConstants.h"
+#include "CommonSpriteUtilities.h"
 #include <iostream>
 
-
-int col = 0;
-int row = 0;
-int spriteSize = 32;
-int parentcurrentFrame = 0;
-sf::Clock animationClock;
-float parentframeDuration = 0.1f; // Duration of each frame in seconds
-ParentEntity::ParentEntity()
+ParentEntity::ParentEntity() : currentFrame((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)
 {
+    // Load the texture from file
     if (!dadWorkTexture.loadFromFile("Images/Dad_Work.png"))
     {
         std::cout << "Can't load the file: Dad_Work.PNG" << std::endl;
     }
-    dadWorkSprite.emplace(dadWorkTexture);// Define the rectangle for the sprite
-    dadWorkSprite->setPosition({500, 300});
-    dadWorkSprite->setScale({5.f, 5.f});
+    // Create the sprite and set its texture
+    dadWorkSprite.emplace(dadWorkTexture);
+    // Set the initial position and scale of the sprite
+    dadWorkSprite->setPosition(CommonSpriteConstants::DEFAULT_POSITION);
+    dadWorkSprite->setScale(CommonSpriteConstants::DEFAULT_CHARACTER_SCALE*2.f);
 }
 
 ParentEntity::~ParentEntity()
@@ -26,13 +24,13 @@ ParentEntity::~ParentEntity()
 
 sf::Sprite ParentEntity::drawAndAnimate()
 {
-    if (animationClock.getElapsedTime().asSeconds() > parentframeDuration)
+    if (animationClock.getElapsedTime().asSeconds() > CommonSpriteConstants::FRAME_DURATION)
     {
-        parentcurrentFrame = (parentcurrentFrame + 1) % 2; // Update the current frame
+        currentFrame = (currentFrame + 1) % CommonSpriteConstants::TOTAL_FRAMES; // Update the current frame
         animationClock.restart(); // Restart the clock for the next frame
     }
 
-    dadWorkSprite->setTextureRect(sf::IntRect({parentcurrentFrame*spriteSize, 0}, {spriteSize, spriteSize}));
+    dadWorkSprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_32>(currentFrame)); // Set the texture rectangle to the current frame
     // Return a copy of the sprite
     return *dadWorkSprite;
 }

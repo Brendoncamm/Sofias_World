@@ -10,4 +10,6 @@ class ParentEntity
     private:
     sf::Texture dadWorkTexture;
     std::optional<sf::Sprite> dadWorkSprite;
+    int currentFrame;
+    sf::Clock animationClock;
 };
