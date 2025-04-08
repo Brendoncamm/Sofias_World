@@ -19,6 +19,7 @@ class theSofia
     bool amplifiedMovement;
     sf::Clock animationClock;
     sf::IntRect getFrameRect(int frameIndex) const;
+    int currentFrame;
     
 
 

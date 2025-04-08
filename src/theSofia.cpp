@@ -1,21 +1,13 @@
 #include "theSofia.h"
 #include "SpecialItems.h"
+#include "CommonSpriteConstants.h"
 #include <iostream>
 
 
 // Sofia Sprite Sheet Constants
 
-int frameWidth = 64;
-int frameHeight = 64;
-int totalFrames = 2;
-int currentFrame = 0;
-float frameDuration = 1.0f; // Duration of each frame in seconds
-
-sf::Vector2i sheetOffset = {0,0};
-sf::Vector2f reflectLeft = {-5.f, 5.f};
-sf::Vector2f reflectRight = {5.f, 5.f};
-
-theSofia::theSofia() : amplifiedMovement(false)
+theSofia::theSofia() : amplifiedMovement(false),
+                       currentFrame()
 {
     if (!myTexture.loadFromFile("Images/Sofia_Crawling_2Frame.png"))
     {
@@ -59,7 +51,7 @@ void theSofia::move(sf::Vector2f movement, float speed)
         return;
     }
     
-    currentFrame = (currentFrame + 1) % totalFrames; // Update the current frame
+    currentFrame = (currentFrame + 1) % CommonSpriteConstants::TOTAL_FRAMES; // Update the current frame
     mySprite->setTextureRect(getFrameRect(currentFrame)); // Set the texture rectangle to the current frame
 
     float speedOfPixels = 20.f; // Speed in pixels per second
@@ -75,19 +67,19 @@ void theSofia::move(sf::Vector2f movement, float speed)
     // which direction she's moving.
     if (movement.x < 0.f)
     {
-        mySprite->setScale(reflectLeft);
+        mySprite->setScale(CommonSpriteConstants::REFLECT_LEFT);
     }
     else if (movement.y == 0)
     {
-        mySprite->setScale(reflectRight); // Reset rotation to face right
+        mySprite->setScale(CommonSpriteConstants::REFLECT_RIGHT); // Reset rotation to face right
     }
     std::cout << "Movement x: " << movement.x << std::endl;
     std::cout << "Movement y: " << movement.y << std::endl;
     if (movement.x != 0.f || 
         movement.y != 0.f && 
-        animationClock.getElapsedTime().asSeconds() > frameDuration)
+        animationClock.getElapsedTime().asSeconds() > CommonSpriteConstants::FRAME_DURATION)
     {
-        currentFrame = (currentFrame + 1) % totalFrames; // Update the current frame
+        currentFrame = (currentFrame + 1) % CommonSpriteConstants::TOTAL_FRAMES; // Update the current frame
         std::cout << "Current frame: " << currentFrame << std::endl;
         mySprite->setTextureRect(getFrameRect(currentFrame)); // Set the texture rectangle to the current frame
         animationClock.restart(); // Restart the clock for the next frame
@@ -111,9 +103,9 @@ void theSofia::amplifyMovement()
 
 sf::IntRect theSofia::getFrameRect(int frameIndex) const
 {
-    int x = sheetOffset.x + (frameWidth * frameIndex);
-    int y = sheetOffset.y;
-    return sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(frameWidth, frameHeight));
+    int x = CommonSpriteConstants::SHEET_OFFSET.x + (CommonSpriteConstants::FRAME_WIDTH_64_BIT * frameIndex);
+    int y = CommonSpriteConstants::SHEET_OFFSET.y;
+    return sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(CommonSpriteConstants::FRAME_WIDTH_64_BIT, CommonSpriteConstants::FRAME_WIDTH_64_BIT));
 }
 
 void theSofia::setAnimationToFirstFrame()
