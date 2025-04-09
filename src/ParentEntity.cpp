@@ -9,6 +9,7 @@ ParentEntity::ParentEntity(TextureManager& textureMgr) : textureManager(textureM
 {
     // Load the texture from file
     dadWorkTexture = textureManager.getTexture(TextureKeys::Dad_Work);
+    textureManager.didEntityTextureLoad(dadWorkTexture, TextureKeys::Dad_Work);
     // Create the sprite and set its texture
     dadWorkSprite.emplace(*dadWorkTexture);
     // Set the initial position and scale of the sprite
