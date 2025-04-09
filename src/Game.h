@@ -3,6 +3,7 @@
 #include "SpecialItems.h"
 #include <SFML/Graphics.hpp>
 #include "ParentEntity.h"
+#include "TextureManager.h"
 
 class Game
 {
@@ -23,6 +24,7 @@ private:
 
     void processObjectInteractions();
     // Game related members
+    TextureManager textureManager;
     theSofia sofia;
     MovementInputHandler inputHandler;
     SpecialItems theSpecialItem;

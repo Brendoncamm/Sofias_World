@@ -39,6 +39,6 @@ with open("../TextureKeys.h", "w") as header:
     header.write("#include <string_view>\n\n")
     header.write("namespace TextureKeys {\n")
     for key in data.keys():
-        header.write(f'    inline constexpr std::string_view {key} = "{key}";\n')
+        header.write(f'    inline constexpr const char* {key} = "{key}";\n')
     header.write("}\n")
     

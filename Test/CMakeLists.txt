@@ -16,6 +16,7 @@ FetchContent_MakeAvailable(SFML)
 add_executable(Sofia_Tests 
     Sofia_Tests.cpp
     ../src/theSofia.cpp
+    ../src/TextureManager.cpp
 )
 
 target_include_directories(Sofia_Tests
