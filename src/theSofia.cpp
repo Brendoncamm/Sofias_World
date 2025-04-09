@@ -2,25 +2,22 @@
 #include "SpecialItems.h"
 #include "CommonSpriteConstants.h"
 #include "CommonSpriteUtilities.h"
+#include "TextureManager.h"
 #include <iostream>
 
 
 // Sofia Sprite Sheet Constants
 
-theSofia::theSofia() : amplifiedMovement(false),
-                       currentFrame()
-{
-    if (!myTexture.loadFromFile("Images/Sofia_Crawling_2Frame.png"))
-    {
-        std::cout << "Can't load the file: Sofia_Happy.PNG" << std::endl;
-    }
-    if (!mySootherTexture.loadFromFile("Images/Sofia_Soother_2Frame.png"))
-    {
-        std::cout << "Can't load the file: Sofia_Soother_Added.PNG" << std::endl;
-    }
-    std::cout << "theSofia constructor called" << std::endl;
-    
-    mySprite.emplace(myTexture);// Define the rectangle for the sprite
+theSofia::theSofia(TextureManager& TextureMgr) : amplifiedMovement(false),
+                                                 currentFrame(),
+                                                 textureManager(TextureMgr)
+{   
+    sofiaTexture     = textureManager.getTexture(TextureKeys::Sofia_Crawling_2Frame);
+    textureManager.didEntityTextureLoad(sofiaTexture, TextureKeys::Sofia_Crawling_2Frame);
+    mySootherTexture = textureManager.getTexture(TextureKeys::Sofia_Soother_2Frame);
+    textureManager.didEntityTextureLoad(mySootherTexture, TextureKeys::Sofia_Soother_2Frame);
+
+    mySprite.emplace(*sofiaTexture);
     mySprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_64>(currentFrame));// Set the texture rectangle to the first frame
     mySprite->setPosition(CommonSpriteConstants::DEFAULT_POSITION);
     mySprite->setScale(CommonSpriteConstants::REFLECT_RIGHT);
@@ -106,8 +103,7 @@ void theSofia::setAnimationToFirstFrame()
 
 void theSofia::sofiaHasSoother()
 {   
-    mySprite->setTexture(mySootherTexture, true);
+    mySprite->setTexture(*mySootherTexture, true);
     mySprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_64>((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)); // Set the texture rectangle to the first frame>);
     mySprite->setScale({0.5f, 0.5f});
 }
-

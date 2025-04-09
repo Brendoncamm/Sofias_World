@@ -1,17 +1,17 @@
 #include "ParentEntity.h"
 #include "CommonSpriteConstants.h"
 #include "CommonSpriteUtilities.h"
+#include "TextureKeys.h"
 #include <iostream>
 
-ParentEntity::ParentEntity() : currentFrame((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)
+ParentEntity::ParentEntity(TextureManager& textureMgr) : textureManager(textureMgr),
+                                                         currentFrame((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)
 {
     // Load the texture from file
-    if (!dadWorkTexture.loadFromFile("Images/Dad_Work.png"))
-    {
-        std::cout << "Can't load the file: Dad_Work.PNG" << std::endl;
-    }
+    dadWorkTexture = textureManager.getTexture(TextureKeys::Dad_Work);
+    textureManager.didEntityTextureLoad(dadWorkTexture, TextureKeys::Dad_Work);
     // Create the sprite and set its texture
-    dadWorkSprite.emplace(dadWorkTexture);
+    dadWorkSprite.emplace(*dadWorkTexture);
     // Set the initial position and scale of the sprite
     dadWorkSprite->setPosition(CommonSpriteConstants::DEFAULT_POSITION);
     dadWorkSprite->setScale(CommonSpriteConstants::DEFAULT_CHARACTER_SCALE*2.f);

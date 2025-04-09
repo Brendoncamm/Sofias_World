@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.28)
 project(CMakeSFMLProject LANGUAGES CXX)
 
 #Find python
+# Currently this does not work to correctly generate the TextureKeys.h file
+# because the python script is not in the same directory as the CMakeLists.txt file
+# TODO fix this
 find_package(Python3 REQUIRED)
 
 add_custom_command(OUTPUT TextureKeys.h 
@@ -30,7 +33,8 @@ add_executable(Sofias_World
     src/MovementInputHandler.cpp
     src/Game.cpp
     src/SpecialItems.cpp
-    src/ParentEntity.cpp)
+    src/ParentEntity.cpp
+    src/TextureManager.cpp)
 add_dependencies(Sofias_World run_codegen)
 
 target_compile_features(Sofias_World PRIVATE cxx_std_17)

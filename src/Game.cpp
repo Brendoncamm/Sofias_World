@@ -1,12 +1,14 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : sofia(), 
+Game::Game() : textureManager(),
+               sofia(textureManager),
                inputHandler(),
                backgroundTexture("Images/background.png"),
                backgroundSprite(backgroundTexture),
                theSpecialItem(),
-               parentEntity()
+               parentEntity(textureManager)
+               
 {
     // Constructor implementation
     window.create(sf::VideoMode({1920u, 1080u}), "Sofia's World");
