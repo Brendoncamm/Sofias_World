@@ -31,6 +31,7 @@ class TextureManager
     // (Refelctions, shadows, etc.)
     std::shared_ptr<sf::Texture> getTexture(const std::string & key);
     
+    void didEntityTextureLoad(std::shared_ptr<sf::Texture> texture, const char* textureName);
 
     private:
     // Load the textures from JSON file

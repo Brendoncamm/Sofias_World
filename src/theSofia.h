@@ -2,6 +2,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "TextureManager.h"
+#include "TextureKeys.h"
 
 class theSofia
 {
@@ -22,4 +23,5 @@ class theSofia
     sf::Clock animationClock;
     int currentFrame;
     TextureManager& textureManager;
+
 };

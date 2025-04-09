@@ -2,7 +2,6 @@
 #include "SpecialItems.h"
 #include "CommonSpriteConstants.h"
 #include "CommonSpriteUtilities.h"
-#include "TextureKeys.h"
 #include "TextureManager.h"
 #include <iostream>
 
@@ -10,13 +9,15 @@
 // Sofia Sprite Sheet Constants
 
 theSofia::theSofia(TextureManager& TextureMgr) : amplifiedMovement(false),
-                       currentFrame(),
-                       textureManager(TextureMgr)
+                                                 currentFrame(),
+                                                 textureManager(TextureMgr)
 {   
-    sofiaTexture = textureManager.getTexture(TextureKeys::Sofia_Crawling_2Frame);
+    sofiaTexture     = textureManager.getTexture(TextureKeys::Sofia_Crawling_2Frame);
+    textureManager.didEntityTextureLoad(sofiaTexture, TextureKeys::Sofia_Crawling_2Frame);
     mySootherTexture = textureManager.getTexture(TextureKeys::Sofia_Soother_2Frame);
-    
-    mySprite.emplace(*sofiaTexture);// Define the rectangle for the sprite
+    textureManager.didEntityTextureLoad(mySootherTexture, TextureKeys::Sofia_Soother_2Frame);
+
+    mySprite.emplace(*sofiaTexture);
     mySprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_64>(currentFrame));// Set the texture rectangle to the first frame
     mySprite->setPosition(CommonSpriteConstants::DEFAULT_POSITION);
     mySprite->setScale(CommonSpriteConstants::REFLECT_RIGHT);
@@ -106,4 +107,3 @@ void theSofia::sofiaHasSoother()
     mySprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_64>((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)); // Set the texture rectangle to the first frame>);
     mySprite->setScale({0.5f, 0.5f});
 }
-

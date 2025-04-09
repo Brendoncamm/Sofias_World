@@ -44,7 +44,7 @@ void TextureManager::generateTextureMap()
         textureMap[key] = texture;
     }
     // Print the loaded textures
-    std::cout << "Loaded textures:" << std::endl;
+    std::cout << "Added textures to map:" << std::endl;
     for (const auto& pair : textureMap)
     {
         std::cout << "Key: " << pair.first << ", Texture: " << pair.second.get() << std::endl;
@@ -64,5 +64,18 @@ std::shared_ptr<sf::Texture> TextureManager::getTexture(const std::string & key)
     {
         std::cerr << "Texture not found: " << key << std::endl;
         return nullptr;
+    }
+}
+
+void TextureManager::didEntityTextureLoad(std::shared_ptr<sf::Texture> texture, const char* textureName)
+{
+    if (!texture)
+    {
+        std::cerr << "Error: Texture not loaded: " << textureName << std::endl;
+        return;
+    }
+    else
+    {
+        std::cout << "Texture loaded successfully: " << textureName << std::endl;
     }
 }
