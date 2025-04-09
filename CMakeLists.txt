@@ -1,6 +1,18 @@
 cmake_minimum_required(VERSION 3.28)
 project(CMakeSFMLProject LANGUAGES CXX)
 
+#Find python
+find_package(Python3 REQUIRED)
+
+add_custom_command(OUTPUT TextureKeys.h 
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/src/Python/Generate_Textures.py
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/Python/Generate_Textures.py
+    COMMENT "Generating TextureKeys.h from Generate_Textures.py"
+)
+
+add_custom_target(run_codegen 
+    DEPENDS TextureKeys.h
+)   
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(FetchContent)
@@ -19,6 +31,8 @@ add_executable(Sofias_World
     src/Game.cpp
     src/SpecialItems.cpp
     src/ParentEntity.cpp)
+add_dependencies(Sofias_World run_codegen)
+
 target_compile_features(Sofias_World PRIVATE cxx_std_17)
 target_link_libraries(Sofias_World PRIVATE SFML::Graphics)
 
