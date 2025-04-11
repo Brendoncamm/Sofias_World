@@ -34,7 +34,8 @@ add_executable(Sofias_World
     src/Game.cpp
     src/SpecialItems.cpp
     src/ParentEntity.cpp
-    src/TextureManager.cpp)
+    src/TextureManager.cpp
+    src/EntityMovementManager.cpp)
 add_dependencies(Sofias_World run_codegen)
 
 target_compile_features(Sofias_World PRIVATE cxx_std_17)
