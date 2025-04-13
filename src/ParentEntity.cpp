@@ -45,5 +45,11 @@ void ParentEntity::moveDadWorkSprite(float speed)
     }
     
     // Move the sprite by 1 pixel to the right
-    dadWorkSprite->move(entityMovement.moveEntityRandomly(speed));
+    entityMovement.moveEntityRandomly(*dadWorkSprite, speed);
+}
+
+void ParentEntity::moveDadEntity(float speed)
+{
+    sf::Vector2f movement = {1,1};
+    entityMovement.moveEntityToMatchSofia(*dadWorkSprite, movement, speed);
 }

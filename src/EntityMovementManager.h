@@ -14,14 +14,14 @@ class EntityMovementManager
     // Once - for example, if you want to entity to match the 
     // player's position
     // This function is used for one-time movements
-    void moveEntity(sf::Sprite& entity, sf::Vector2f movement = {0,0}, float speed = 0.f);
+    void moveEntityToMatchSofia(sf::Sprite& entity, sf::Vector2f movement = {0,0}, float speed = 0.f);
     
     // Move entity by a given movement vector continuously in very defined ways 
     void moveEntityContinuously(sf::Sprite& entity, sf::Vector2f movement = {0,0}, float speed = 0.f);
 
     // Move entity randomly - this will use perlin noise
     // to move the entity in a random direction
-    sf::Vector2f moveEntityRandomly(float dt);
+    void moveEntityRandomly(sf::Sprite& entity, float speed);
 
     private:
 

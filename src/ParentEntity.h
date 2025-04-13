@@ -9,6 +9,7 @@ class ParentEntity
     ~ParentEntity();
     sf::Sprite drawAndAnimate();
     void moveDadWorkSprite(float speed);
+    void moveDadEntity(float speed);
 
     private:
     TextureManager textureManager;
