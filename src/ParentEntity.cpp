@@ -5,7 +5,8 @@
 #include <iostream>
 
 ParentEntity::ParentEntity(TextureManager& textureMgr) : textureManager(textureMgr),
-                                                         currentFrame((int)CommonSpriteConstants::FRAME_NUMBER::FIRST)
+                                                         currentFrame((int)CommonSpriteConstants::FRAME_NUMBER::FIRST),
+                                                         entityMovement()
 {
     // Load the texture from file
     dadWorkTexture = textureManager.getTexture(TextureKeys::Dad_Work);
@@ -33,4 +34,22 @@ sf::Sprite ParentEntity::drawAndAnimate()
     dadWorkSprite->setTextureRect(CommonSpriteUtilities::getSpriteFrameRect<CommonSpriteConstants::SPRITE_FRAME_SIZE_32>(currentFrame)); // Set the texture rectangle to the current frame
     // Return a copy of the sprite
     return *dadWorkSprite;
+}
+
+void ParentEntity::moveDadWorkSprite(float speed)
+{
+    if (!dadWorkSprite)
+    {
+        std::cerr << "Error: dadWorkSprite is not initialized." << std::endl;
+        return;
+    }
+    
+    // Move the sprite by 1 pixel to the right
+    entityMovement.moveEntityRandomly(*dadWorkSprite, speed);
+}
+
+void ParentEntity::moveDadEntity(float speed)
+{
+    sf::Vector2f movement = {1,1};
+    entityMovement.moveEntityToMatchSofia(*dadWorkSprite, movement, speed);
 }

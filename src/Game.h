@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "ParentEntity.h"
 #include "TextureManager.h"
+#include "EntityMovementManager.h"
 
 class Game
 {
@@ -29,6 +30,7 @@ private:
     MovementInputHandler inputHandler;
     SpecialItems theSpecialItem;
     ParentEntity parentEntity;
+    EntityMovementManager entityMovementManager;
 
     // SFML related members
     sf::RenderWindow window;

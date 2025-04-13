@@ -7,7 +7,8 @@ Game::Game() : textureManager(),
                backgroundTexture("Images/background.png"),
                backgroundSprite(backgroundTexture),
                theSpecialItem(),
-               parentEntity(textureManager)
+               parentEntity(textureManager),
+               entityMovementManager()
                
 {
     // Constructor implementation
@@ -30,6 +31,7 @@ void Game::run()
         float dt = deltaClock.restart().asSeconds();
         // Update game state
         processSofiaMovements(dt);
+        parentEntity.moveDadWorkSprite(dt);
         render();
     }
 }
