@@ -15,6 +15,7 @@ namespace TextureKeys {
     inline constexpr const char* Sofia_Soother_2Frame = "Sofia_Soother_2Frame";
     inline constexpr const char* Transparent_Soother = "Transparent_Soother";
     inline constexpr const char* background = "background";
+    inline constexpr const char* roguelikeIndoor_transparent = "roguelikeIndoor_transparent";
     inline constexpr const char* Dad_Work = "Dad_Work";
     inline constexpr const char* Sprite_Sheet_Crawling = "Sprite_Sheet_Crawling";
     inline constexpr const char* Sofia_Soother_Added = "Sofia_Soother_Added";
